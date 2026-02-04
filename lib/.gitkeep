@@ -1,0 +1,4 @@
+# This directory will contain TypeScript types and API client code
+# You'll create these files as you follow the lesson:
+# - types.ts (TypeScript interfaces for Webiny data)
+# - webiny.ts (API client functions)

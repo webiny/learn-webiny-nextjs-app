@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Learn Webiny Next.js App
+
+A Next.js starter application for learning how to integrate Webiny Headless CMS with Static Site Generation.
+
+## About This Project
+
+This is the companion repository for the **Learn Webiny - Headless CMS Course**. 
+
+By following **Lesson 8: Learn Webiny Next.js App**, you'll learn how to:
+- Connect a Next.js app to Webiny Headless CMS
+- Create API keys with proper permissions
+- Fetch and display content using the Read API
+- Implement Static Site Generation (SSG)
+- Handle errors gracefully with TypeScript
+
+## Prerequisites
+
+- Node.js 18 or higher
+- npm, yarn, or pnpm
+- A Webiny project with published products (from Lessons 1-7)
+- Basic understanding of React and Next.js
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/webiny/learn-webiny-nextjs-app.git
+cd learn-webiny-nextjs-app
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Follow the Lesson
+
+This repository contains the **starter code** only. To complete the application, follow the step-by-step tutorial:
+
+👉 **[Lesson 8: Learn Webiny Next.js App](https://webiny.com/learn/lessons/headless-cms/learn-webiny-nextjs-app)**
+
+The lesson will guide you through:
+- Finding your Webiny API URL
+- Creating an API key with proper permissions
+- Setting up environment variables
+- Creating TypeScript types (`lib/types.ts`)
+- Building the API client (`lib/webiny.ts`)
+- Fetching and displaying products (`app/page.tsx`)
+- Building for production with SSG
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+learn-webiny-nextjs-app/
+├── app/              # Next.js App Router
+│   ├── layout.tsx    # Root layout
+│   ├── page.tsx      # Homepage (you'll modify this)
+│   └── globals.css   # Tailwind styles
+├── lib/              # Your code goes here (create these files):
+│   ├── types.ts      # TypeScript interfaces (you'll create)
+│   └── webiny.ts     # API client functions (you'll create)
+├── public/           # Static assets
+├── .env.local        # API credentials (you'll create - not in git)
+└── package.json      # Dependencies
+```
 
-## Learn More
+## Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.local.example` to `.env.local` and fill in your Webiny API details:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cp .env.local.example .env.local
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Then edit `.env.local` with your actual API URL and token (from Lesson 8).
 
-## Deploy on Vercel
+## Need Help?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **📚 Full Tutorial:** [Lesson 8](https://webiny.com/learn/lessons/headless-cms/learn-webiny-nextjs-app)
+- **✅ Completed Example:** Check the [`completed` branch](https://github.com/webiny/learn-webiny-nextjs-app/tree/completed) to see the full solution
+- **📖 Webiny Docs:** [webiny.com/docs](https://www.webiny.com/docs)
+- **💬 Community:** [Webiny Community Slack](https://www.webiny.com/slack)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## What's Next?
+
+After completing Lesson 8, continue with:
+- **Lesson 9:** Writing Data (Create a contact form with mutations)
+- **Lesson 10:** Lifecycle Events (Email validation)
+- **Lesson 11:** Customize Data Lists
+- **Lesson 12:** Create Custom APIs
+
+## Tech Stack
+
+- **Next.js** 16.1.6 (App Router)
+- **React** 19.2.3
+- **TypeScript** 5
+- **Tailwind CSS** 4
+- **Webiny** Headless CMS
+
+## License
+
+MIT
+
+---
+
+**Built with ❤️ for the Webiny learning community**
