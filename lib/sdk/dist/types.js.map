@@ -1,0 +1,1 @@
+{"version":3,"names":[],"sources":["types.ts"],"sourcesContent":["export interface CmsSdkConfig {\n    apiToken: string;\n    apiHost: string;\n    apiTenant: string;\n    fetch?: typeof fetch;\n}\n"],"mappings":"","ignoreList":[]}
