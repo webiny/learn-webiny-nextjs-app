@@ -891,6 +891,11 @@
   resolved "https://registry.yarnpkg.com/@unrs/resolver-binding-win32-x64-msvc/-/resolver-binding-win32-x64-msvc-1.11.1.tgz#538b1e103bf8d9864e7b85cc96fa8d6fb6c40777"
   integrity sha512-lrW200hZdbfRtztbygyaq/6jP6AKE8qQN2KvPcJ+x7wiD038YtnYtZ82IMNJ69GJibV7bwL3y9FgK+5w/pYt6g==
 
+"@webiny/sdk@6.0.0-rc.0":
+  version "6.0.0-rc.0"
+  resolved "https://registry.yarnpkg.com/@webiny/sdk/-/sdk-6.0.0-rc.0.tgz#58cffed170ffde22a2657c8cf993e7f4d0e1227f"
+  integrity sha512-JliqRTGDxKEOxEOoMbrATHTVefItmuzdEfJbzK6mU13iah0flTCBPFw/C4Q3xtQIkMTI4sSOByLO1o9nMMwYHA==
+
 acorn-jsx@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.3.2.tgz#7ed5bb55908b3b2f1bc55c6af1653bada7f07937"

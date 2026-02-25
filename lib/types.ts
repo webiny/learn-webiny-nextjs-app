@@ -1,4 +1,4 @@
-import { CmsEntryData } from "@/lib/sdk/dist";
+import { CmsEntryData } from "@webiny/sdk";
 
 export interface Product {
   name: string;

@@ -1,4 +1,4 @@
-import { Sdk } from "./sdk/dist";
+import { Sdk } from "@webiny/sdk";
 
 const API_ENDPOINT = process.env.WEBINY_API_ENDPOINT!;
 const API_TOKEN = process.env.WEBINY_API_TOKEN!;
@@ -17,4 +17,3 @@ export const sdk = new Sdk({
   tenant: API_TENANT,
 });
 
-export * from "./sdk/dist";
