@@ -1,4 +1,5 @@
-import { sdk, CmsEntryData } from "@/lib/webiny";
+import { sdk } from "@/lib/webiny";
+import type { CmsEntryData } from "@webiny/sdk";
 import type { Product } from "@/lib/types";
 
 export default async function HomePage() {
@@ -21,8 +22,12 @@ export default async function HomePage() {
       ],
     });
 
-    products = response.data;
-    totalCount = response.meta.totalCount;
+    if (response.isOk()) {
+      products = response.value.data;
+      totalCount = response.value.meta.totalCount;
+    } else {
+      throw response.error;
+    }
   } catch (err) {
     error = err instanceof Error ? err.message : "Failed to fetch products";
   }
