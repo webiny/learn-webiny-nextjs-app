@@ -28,7 +28,7 @@ export interface TextWithImageBlock extends GenericBlock {
 }
 
 export interface RichTextBlock extends GenericBlock {
-  content: SerializedEditorState;
+  content: { html: string; state: string } | string;
 }
 
 export interface ThreeGridBoxBlock extends GenericBlock {
@@ -43,7 +43,6 @@ export interface Article {
   title: string;
   description: string;
   slug: string;
-  content: { html: string; state: string } | string;
   content: Array<GenericBlock>;
 }
 
