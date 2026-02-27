@@ -1,4 +1,5 @@
 import React from "react";
+import "./lexical.css";
 import { ReadonlyArticle } from "./types";
 
 import {
@@ -19,6 +20,13 @@ interface ArticleProps {
 }
 
 export const Article = ({ article }: ArticleProps) => {
+  console.log("article", article);
+
+  const richText =
+    typeof article.values?.richText === "string"
+      ? article.values?.richText
+      : article.values?.richText?.html;
+
   return (
     <div className="mx-auto max-w-[1100px] px-[10px] flex flex-col antialiased">
       <h1 className="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
@@ -29,6 +37,7 @@ export const Article = ({ article }: ArticleProps) => {
       <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
         {article.values?.description ?? ""}
       </p>
+      <div dangerouslySetInnerHTML={{ __html: richText || "" }} />
 
       {(article.values?.content || []).map((block, index) => {
         if (isRichTextBlock(block)) {

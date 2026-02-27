@@ -28,7 +28,7 @@ function LivePreviewContent() {
   return <ArticleLivePreview editorOrigin={editorOrigin} />;
 }
 
-export default function LivePreviewPage() {
+export default function ArticlePreviewPage() {
   return (
     <Suspense fallback={null}>
       <LivePreviewContent />
