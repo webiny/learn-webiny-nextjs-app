@@ -8,10 +8,8 @@ import {
   isBannerBlock,
   isHeroBlock,
   isRichTextBlock,
-  isTextWithImageBlock,
   isThreeGridBoxBlock,
   RichTextBlockComponent,
-  TextWithImageBlockComponent,
   ThreeGridBoxBlockComponent,
 } from "./Blocks";
 
@@ -34,9 +32,6 @@ export const Article = ({ article }: ArticleProps) => {
       {(article.values?.content || []).map((block, index) => {
         if (isRichTextBlock(block)) {
           return <RichTextBlockComponent key={index} block={block} />;
-        }
-        if (isTextWithImageBlock(block)) {
-          return <TextWithImageBlockComponent key={index} block={block} />;
         }
         if (isBannerBlock(block)) {
           return <BannerBlockComponent key={index} block={block} />;

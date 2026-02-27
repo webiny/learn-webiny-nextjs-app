@@ -1,5 +1,4 @@
 import type { CmsEntryData } from "@webiny/sdk";
-import type { SerializedEditorState } from "lexical";
 
 export interface GenericBlock {
   __typename: string;
@@ -18,12 +17,6 @@ export interface BannerBlock extends GenericBlock {
   title: string;
   actionUrl: string;
   actionLabel: string;
-  image: string;
-}
-
-export interface TextWithImageBlock extends GenericBlock {
-  title: string;
-  content: SerializedEditorState;
   image: string;
 }
 
