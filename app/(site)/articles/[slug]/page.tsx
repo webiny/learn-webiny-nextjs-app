@@ -8,7 +8,7 @@ const ARTICLE_FIELDS = [
   "values.title",
   "values.description",
   "values.slug",
-  "values.content",
+  // "values.content",
 ];
 
 interface ArticlePageProps {
@@ -18,19 +18,12 @@ interface ArticlePageProps {
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
 
-  console.log("slugara", slug);
   const result = await sdk.cms.getEntry<ArticleValues>({
     modelId: "article",
     where: { values: { slug } },
     fields: ARTICLE_FIELDS,
   });
 
-  console.log({
-    modelId: "article",
-    where: { values: { slug } },
-    fields: ARTICLE_FIELDS,
-  });
-  console.log(result);
   if (!result.isOk()) {
     throw new Error(`Failed to fetch article: ${result.error}`);
   }
