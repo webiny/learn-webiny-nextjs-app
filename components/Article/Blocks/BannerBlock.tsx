@@ -5,7 +5,11 @@ export const isBannerBlock = (block: GenericBlock): block is BannerBlock => {
   return block.__typename === "Article_Content_Banner";
 };
 
-export const BannerBlockComponent = ({ block }: { block: BannerBlock }) => {
+interface BannerBlockComponentProps {
+  block: BannerBlock;
+}
+
+export const BannerBlockComponent = ({ block }: BannerBlockComponentProps) => {
   return (
     <section className="bg-purple-50 rounded p-5 my-10">
       <div className="gap-8 items-center py-8 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16">

@@ -7,11 +7,13 @@ export const isThreeGridBoxBlock = (
   return block.__typename === "Article_Content_ThreeGridBox";
 };
 
+interface ThreeGridBoxBlockComponentProps {
+  block: ThreeGridBoxBlock;
+}
+
 export const ThreeGridBoxBlockComponent = ({
   block,
-}: {
-  block: ThreeGridBoxBlock;
-}) => {
+}: ThreeGridBoxBlockComponentProps) => {
   return (
     <section className="bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-300">
       <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">

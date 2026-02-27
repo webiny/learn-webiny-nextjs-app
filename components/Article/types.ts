@@ -43,7 +43,7 @@ export interface Article {
   title: string;
   description: string;
   slug: string;
-  richText: { html: string; state: string } | string;
+  content: { html: string; state: string } | string;
   content: Array<GenericBlock>;
 }
 

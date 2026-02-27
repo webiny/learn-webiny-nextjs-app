@@ -1,6 +1,5 @@
 import React from "react";
 import { GenericBlock, RichTextBlock } from "../types";
-// import { RichTextLexicalRenderer } from "@webiny/react-rich-text-lexical-renderer";
 
 export const isRichTextBlock = (
   block: GenericBlock,
@@ -8,11 +7,15 @@ export const isRichTextBlock = (
   return block.__typename === "Article_Content_Richtextfield";
 };
 
-export const RichTextBlockComponent = ({
-  block: _block,
-}: {
+interface RichTextBlockComponentProps {
   block: RichTextBlock;
-}) => {
-  // return <RichTextLexicalRenderer value={block.content} />;
-  return null;
+}
+
+export const RichTextBlockComponent = ({
+  block,
+}: RichTextBlockComponentProps) => {
+  const richText =
+    typeof block.content === "string" ? block?.content : block?.content?.html;
+
+  return <div dangerouslySetInnerHTML={{ __html: richText ?? "" }} />;
 };

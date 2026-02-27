@@ -5,7 +5,11 @@ export const isHeroBlock = (block: GenericBlock): block is HeroBlock => {
   return block.__typename === "Article_Content_Hero";
 };
 
-export const HeroBlockComponent = ({ block }: { block: HeroBlock }) => {
+interface HeroBlockComponentProps {
+  block: HeroBlock;
+}
+
+export const HeroBlockComponent = ({ block }: HeroBlockComponentProps) => {
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="gap-8 items-center py-8 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16">
