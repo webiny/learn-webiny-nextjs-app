@@ -1,33 +1,53 @@
-import { sdk } from "@/lib/webiny";
-import type { CmsEntryData } from "@webiny/sdk";
-import type { Product } from "@/lib/types";
+import { gqlFetch } from "@/lib/graphql";
+import type { Product, ProductCategory } from "@/lib/types";
+
+const LIST_PRODUCTS = /* GraphQL */ `
+  query ListProducts {
+    listProducts {
+      data {
+        id
+        name
+        description
+        price
+        sku
+        category {
+          id
+          name
+          slug
+        }
+      }
+      meta {
+        totalCount
+      }
+    }
+  }
+`;
+
+interface ProductEntry {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  sku: string;
+  category?: ProductCategory & { id: string };
+}
+
+interface ListProductsData {
+  listProducts: {
+    data: ProductEntry[];
+    meta: { totalCount: number };
+  };
+}
 
 export default async function HomePage() {
-  let products: CmsEntryData<Product>[] = [];
+  let products: ProductEntry[] = [];
   let totalCount = 0;
   let error: string | null = null;
 
   try {
-    const response = await sdk.cms.listEntries<Product>({
-      modelId: "product",
-      fields: [
-        "id",
-        "values.name",
-        "values.description",
-        "values.price",
-        "values.sku",
-        "values.category.id",
-        "values.category.values.name",
-        "values.category.values.slug",
-      ],
-    });
-
-    if (response.isOk()) {
-      products = response.value.data;
-      totalCount = response.value.meta.totalCount;
-    } else {
-      throw response.error;
-    }
+    const data = await gqlFetch<ListProductsData>(LIST_PRODUCTS);
+    products = data.listProducts.data;
+    totalCount = data.listProducts.meta.totalCount;
   } catch (err) {
     error = err instanceof Error ? err.message : "Failed to fetch products";
   }
@@ -62,25 +82,19 @@ export default async function HomePage() {
               >
                 <div className="flex justify-between items-start mb-2">
                   <div>
-                    <h2 className="text-2xl font-semibold">
-                      {product.values!.name}
-                    </h2>
-                    {product.values!.category && (
+                    <h2 className="text-2xl font-semibold">{product.name}</h2>
+                    {product.category && (
                       <span className="inline-block mt-1 px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">
-                        {product.values!.category!.values!.name}
+                        {product.category.name}
                       </span>
                     )}
                   </div>
                   <span className="text-2xl font-bold text-blue-600">
-                    ${product.values!.price}
+                    ${product.price}
                   </span>
                 </div>
-                <p className="text-gray-600 mb-3">
-                  {product.values!.description}
-                </p>
-                <p className="text-sm text-gray-500">
-                  SKU: {product.values!.sku}
-                </p>
+                <p className="text-gray-600 mb-3">{product.description}</p>
+                <p className="text-sm text-gray-500">SKU: {product.sku}</p>
               </div>
             ))}
           </div>

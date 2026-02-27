@@ -1,7 +1,6 @@
-import type { CmsEntryData } from "@webiny/sdk";
-
 export interface GenericBlock {
   __typename: string;
+  _templateId: string;
 }
 
 export interface HeroBlock extends GenericBlock {
@@ -32,11 +31,12 @@ export interface ThreeGridBoxBlock extends GenericBlock {
   }>;
 }
 
-export interface Article {
-  title: string;
-  description: string;
-  slug: string;
-  content: Array<GenericBlock>;
+export interface ReadonlyArticle {
+  id: string;
+  values: {
+    title: string;
+    description: string;
+    slug: string;
+    content: Array<GenericBlock>;
+  };
 }
-
-export type ReadonlyArticle = CmsEntryData<Article>;

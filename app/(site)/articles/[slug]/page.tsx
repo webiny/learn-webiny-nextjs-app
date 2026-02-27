@@ -1,15 +1,59 @@
 import { notFound } from "next/navigation";
-import { sdk } from "@/lib/webiny";
-import { Article as ArticleValues } from "@/components/Article/types";
+import { gqlFetch } from "@/lib/graphql";
 import { Article } from "@/components/Article/Article";
+import type { ReadonlyArticle } from "@/components/Article/types";
 
-const ARTICLE_FIELDS = [
-  "id",
-  "values.title",
-  "values.description",
-  "values.slug",
-  // "values.content",
-];
+const GET_ARTICLE = /* GraphQL */ `
+  query GetArticle($slug: String!) {
+    getArticle(where: { values: { slug: $slug } }) {
+      data {
+        id
+        values {
+          title
+          description
+          slug
+          content {
+            ... on Article_Content_Hero {
+              title
+              subtitle
+              description
+              image
+              callToActionButtonLabel
+              callToActionButtonUrl
+              __typename
+            }
+            ... on Article_Content_ThreeGridBox {
+              boxes {
+                title
+                description
+                icon
+                __typename
+              }
+              __typename
+            }
+            ... on Article_Content_Banner {
+              title
+              actionLabel
+              actionUrl
+              image
+              __typename
+            }
+            ... on Article_Content_Richtextfield {
+              content
+              __typename
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+interface GetArticleData {
+  getArticle: {
+    data: ReadonlyArticle | null;
+  };
+}
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>;
@@ -18,17 +62,8 @@ interface ArticlePageProps {
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
 
-  const result = await sdk.cms.getEntry<ArticleValues>({
-    modelId: "article",
-    where: { values: { slug } },
-    fields: ARTICLE_FIELDS,
-  });
-
-  if (!result.isOk()) {
-    throw new Error(`Failed to fetch article: ${result.error}`);
-  }
-
-  const article = result.value;
+  const data = await gqlFetch<GetArticleData>(GET_ARTICLE, { slug });
+  const article = data.getArticle.data;
 
   if (!article) {
     notFound();
