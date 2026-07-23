@@ -21,7 +21,8 @@ export default async (): Promise<NextConfig> => {
         },
         webpack(config, context) {
             config.externals.push({
-                "thread-stream": "commonjs thread-stream"
+                "thread-stream": "commonjs thread-stream",
+                "pino-pretty": "commonjs pino-pretty"
             });
 
             // Add plugins responsible for theme compilation.
