@@ -1,49 +1,32 @@
+"use client";
+
 import React from "react";
 import "./lexical.css";
-import { ReadonlyArticle } from "./types";
+import dynamic from "next/dynamic";
+import type { CmsEntry, CmsModelDefinition } from "@webiny/content-sdk-nextjs";
 
-import {
-  BannerBlockComponent,
-  HeroBlockComponent,
-  isBannerBlock,
-  isHeroBlock,
-  isRichTextBlock,
-  isThreeGridBoxBlock,
-  RichTextBlockComponent,
-  ThreeGridBoxBlockComponent,
-} from "./Blocks";
+const ArticleContentSSR = dynamic(() => import("./ArticleContent").then(m => m.ArticleContent), {
+    ssr: true
+});
+
+const ArticleContentNoSSR = dynamic(() => import("./ArticleContent").then(m => m.ArticleContent), {
+    ssr: false
+});
 
 interface ArticleProps {
-  article: ReadonlyArticle;
+    entry: CmsEntry | null;
+    model: CmsModelDefinition;
+    isEditing?: boolean;
 }
 
-export const Article = ({ article }: ArticleProps) => {
-  return (
-    <div className="mx-auto max-w-[1100px] px-[10px] flex flex-col antialiased">
-      <h1 className="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
-        <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
-          {article.values?.title ?? "Untitled"}
-        </span>
-      </h1>
-      <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-        {article.values?.description ?? ""}
-      </p>
+export const Article = ({ entry, model, isEditing }: ArticleProps) => {
+    if (!entry && !isEditing) {
+        return <div className="p-8">Article not found.</div>;
+    }
 
-      {(article.values?.content || []).map((block, index) => {
-        if (isRichTextBlock(block)) {
-          return <RichTextBlockComponent key={index} block={block} />;
-        }
-        if (isBannerBlock(block)) {
-          return <BannerBlockComponent key={index} block={block} />;
-        }
-        if (isHeroBlock(block)) {
-          return <HeroBlockComponent key={index} block={block} />;
-        }
-        if (isThreeGridBoxBlock(block)) {
-          return <ThreeGridBoxBlockComponent key={index} block={block} />;
-        }
-        return <pre key={index}>{JSON.stringify(block)}</pre>;
-      })}
-    </div>
-  );
+    return isEditing ? (
+        <ArticleContentNoSSR entry={entry} model={model} />
+    ) : (
+        <ArticleContentSSR entry={entry} model={model} />
+    );
 };

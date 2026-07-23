@@ -1,37 +1,19 @@
-"use client";
+import React from "react";
+import { initializeContentSdk, contentSdk } from "@/lib/content";
+import { getTenant } from "@/lib/getTenant";
+import { Article } from "@/components/Article/Article";
 
-import React, { Suspense } from "react";
-import { useSearchParams } from "next/navigation";
-import dynamic from "next/dynamic";
+export default async function ArticlePreviewPage() {
+    initializeContentSdk({ apiTenant: await getTenant() });
+    const model = await contentSdk.cms.getModel("article");
 
-// Disable SSR: lexical/rich-text renderer accesses `document` at module load time.
-const ArticleLivePreview = dynamic(
-  () =>
-    import("@/components/Article/ArticleLivePreview").then(
-      (m) => m.ArticleLivePreview,
-    ),
-  { ssr: false },
-);
+    if (!model) {
+        return null;
+    }
 
-function LivePreviewContent() {
-  const searchParams = useSearchParams();
-  const editorOrigin = searchParams.get("origin");
-
-  if (!editorOrigin) {
     return (
-      <div className="p-8 text-red-600">
-        Missing <code>origin</code> query parameter. Live Preview is disabled.
-      </div>
+        <main className="pb-12">
+            <Article entry={null} model={model} isEditing />
+        </main>
     );
-  }
-
-  return <ArticleLivePreview editorOrigin={editorOrigin} />;
-}
-
-export default function ArticlePreviewPage() {
-  return (
-    <Suspense fallback={null}>
-      <LivePreviewContent />
-    </Suspense>
-  );
 }

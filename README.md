@@ -4,9 +4,10 @@ A Next.js starter application for learning how to integrate Webiny Headless CMS 
 
 ## About This Project
 
-This is the companion repository for the **Learn Webiny - Headless CMS Course**. 
+This is the companion repository for the **Learn Webiny - Headless CMS Course**.
 
 By following **Lesson 8: Learn Webiny Next.js App**, you'll learn how to:
+
 - Connect a Next.js app to Webiny Headless CMS
 - Create API keys with proper permissions
 - Fetch and display content using the Read API
@@ -42,6 +43,7 @@ This repository contains the **starter code** only. To complete the application,
 👉 **[Lesson 8: Learn Webiny Next.js App](https://webiny.com/learn/lessons/headless-cms/learn-webiny-nextjs-app)**
 
 The lesson will guide you through:
+
 - Finding your Webiny API URL
 - Creating an API key with proper permissions
 - Setting up environment variables
@@ -94,6 +96,7 @@ Then edit `.env.local` with your actual API URL and token (from Lesson 8).
 ## What's Next?
 
 After completing Lesson 8, continue with:
+
 - **Lesson 9:** Writing Data (Create a contact form with mutations)
 - **Lesson 10:** Lifecycle Events (Email validation)
 - **Lesson 11:** Customize Data Lists

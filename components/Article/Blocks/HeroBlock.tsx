@@ -1,59 +1,66 @@
 import React from "react";
-import { GenericBlock, HeroBlock } from "../types";
+import NextImage from "next/image";
+import { type Asset } from "@webiny/content-sdk-nextjs";
 
-export const isHeroBlock = (block: GenericBlock): block is HeroBlock => {
-  return block.__typename === "Article_Content_Hero";
-};
-
-interface HeroBlockComponentProps {
-  block: HeroBlock;
+export interface HeroBlockProps {
+    title: string;
+    subtitle?: string;
+    description: string;
+    newImage?: Asset;
+    callToActionButtonLabel?: string;
+    callToActionButtonUrl?: string;
 }
 
-export const HeroBlockComponent = ({ block }: HeroBlockComponentProps) => {
-  return (
-    <section className="bg-white dark:bg-gray-900">
-      <div className="gap-8 items-center py-8 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16">
-        {block.image ? (
-          <img
-            className="w-full dark:hidden shadow-xl h-auto max-w-full rounded-lg"
-            src={block.image}
-            alt="dashboard image"
-          />
-        ) : null}
-        {block.image ? (
-          <img
-            className="w-full hidden shadow-xl dark:block h-auto max-w-full rounded-lg"
-            src={block.image}
-            alt="dashboard image"
-          />
-        ) : null}
-        <div className="mt-4 md:mt-0">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-            {block.title}
-          </h2>
-          <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
-            {block.description}
-          </p>
-          <a
-            href={block.callToActionButtonUrl}
-            className="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900"
-          >
-            {block.callToActionButtonLabel}
-            <svg
-              className="ml-2 -mr-1 w-5 h-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </section>
-  );
+export const HeroBlockComponent = (props: HeroBlockProps) => {
+    return (
+        <section className="my-8 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 overflow-hidden">
+            <div className="flex items-center gap-12 p-10 md:p-14">
+                <div className="flex-1">
+                    {props.subtitle ? (
+                        <p className="text-sm font-medium text-emerald-400 uppercase tracking-wider mb-3">
+                            {props.subtitle}
+                        </p>
+                    ) : null}
+                    <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
+                        {props.title}
+                    </h2>
+                    <p className="text-lg text-slate-300 leading-relaxed mb-6">
+                        {props.description}
+                    </p>
+                    {props.callToActionButtonUrl ? (
+                        <a
+                            href={props.callToActionButtonUrl}
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors"
+                        >
+                            {props.callToActionButtonLabel}
+                            <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                />
+                            </svg>
+                        </a>
+                    ) : null}
+                </div>
+                {props.newImage ? (
+                    <div className="hidden md:block flex-shrink-0">
+                        <NextImage
+                            width={props.newImage.image?.width}
+                            height={props.newImage.image?.height}
+                            className="w-64 h-auto rounded-xl shadow-lg"
+                            src={props.newImage.url}
+                            alt={props.title}
+                        />
+                    </div>
+                ) : null}
+            </div>
+        </section>
+    );
 };

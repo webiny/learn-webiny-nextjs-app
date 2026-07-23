@@ -1,4 +1,4 @@
-export * from "./RichTextBlock";
-export * from "./HeroBlock";
-export * from "./ThreeGridBoxBlock";
-export * from "./BannerBlock";
+export { HeroBlockComponent } from "./HeroBlock";
+export { BannerBlockComponent } from "./BannerBlock";
+export { RichTextBlockComponent } from "./RichTextBlock";
+export { ThreeGridBoxBlockComponent } from "./ThreeGridBoxBlock";
