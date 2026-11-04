@@ -12,3 +12,9 @@ export interface ProductCategory {
   name: string;
   slug: string;
 }
+
+export interface ContactSubmission {
+  name: string;
+  email: string;
+  message: string;
+}
