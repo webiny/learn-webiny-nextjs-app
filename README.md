@@ -1,116 +1,81 @@
-# Learn Webiny Next.js App
+# Learn Webiny Next.js app
 
-A Next.js starter application for learning how to integrate Webiny Headless CMS with Static Site Generation.
+The companion app for the Headless CMS part of the [Learn Webiny course](https://webiny.com/learn). You clone this repository at the start of the "Learn Webiny Next.js App" lesson and add code to it in the lessons that follow.
 
-## About This Project
-
-This is the companion repository for the **Learn Webiny - Headless CMS Course**. 
-
-By following **Lesson 8: Learn Webiny Next.js App**, you'll learn how to:
-- Connect a Next.js app to Webiny Headless CMS
-- Create API keys with proper permissions
-- Fetch and display content using the Read API
-- Implement Static Site Generation (SSG)
-- Handle errors gracefully with TypeScript
+The `main` branch is the starting point. It has a Next.js 16 app with TypeScript, Tailwind CSS 4 and `@webiny/sdk` installed, and nothing else. The lessons tell you which files to create.
 
 ## Prerequisites
 
-- Node.js 18 or higher
-- npm, yarn, or pnpm
-- A Webiny project with published products (from Lessons 1-7)
-- Basic understanding of React and Next.js
+- Node.js 20.9 or higher
+- npm
+- A Webiny 6.5 project with a few published `product` entries (from the earlier course lessons)
 
-## Getting Started
-
-### 1. Clone the Repository
+## Getting started
 
 ```bash
-git clone https://github.com/webiny/learn-webiny-nextjs-app.git
+git clone https://github.com/webiny/learn-webiny-nextjs-app.git learn-webiny-nextjs-app
 cd learn-webiny-nextjs-app
-```
-
-### 2. Install Dependencies
-
-```bash
 npm install
-```
-
-### 3. Follow the Lesson
-
-This repository contains the **starter code** only. To complete the application, follow the step-by-step tutorial:
-
-👉 **[Lesson 8: Learn Webiny Next.js App](https://webiny.com/learn/lessons/headless-cms/learn-webiny-nextjs-app)**
-
-The lesson will guide you through:
-- Finding your Webiny API URL
-- Creating an API key with proper permissions
-- Setting up environment variables
-- Creating TypeScript types (`lib/types.ts`)
-- Building the API client (`lib/webiny.ts`)
-- Fetching and displaying products (`app/page.tsx`)
-- Building for production with SSG
-
-### 4. Run Development Server
-
-```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the app.
+Open [http://localhost:3000](http://localhost:3000). You should see an "Our Products" heading.
 
-## Project Structure
-
-```
-learn-webiny-nextjs-app/
-├── app/              # Next.js App Router
-│   ├── layout.tsx    # Root layout
-│   ├── page.tsx      # Homepage (you'll modify this)
-│   └── globals.css   # Tailwind styles
-├── lib/              # Your code goes here (create these files):
-│   ├── types.ts      # TypeScript interfaces (you'll create)
-│   └── webiny.ts     # API client functions (you'll create)
-├── public/           # Static assets
-├── .env.local        # API credentials (you'll create - not in git)
-└── package.json      # Dependencies
-```
-
-## Environment Variables
-
-Copy `.env.local.example` to `.env.local` and fill in your Webiny API details:
+Then copy the environment file and fill in your API endpoint and token, as described in the lesson:
 
 ```bash
 cp .env.local.example .env.local
 ```
 
-Then edit `.env.local` with your actual API URL and token (from Lesson 8).
+## Lessons and branches
 
-## Need Help?
+| Lesson | What you add | Finished code |
+| --- | --- | --- |
+| [Learn Webiny Next.js App](https://webiny.com/learn/lessons/headless-cms/learn-webiny-nextjs-app) | `.env.local`, `lib/webiny.ts` | included in `reading-data-completed` |
+| [Reading Data](https://webiny.com/learn/lessons/headless-cms/reading-data) | `lib/types.ts`, product list in `app/page.tsx` | [`reading-data-completed`](https://github.com/webiny/learn-webiny-nextjs-app/tree/reading-data-completed) |
+| [Writing Data](https://webiny.com/learn/lessons/headless-cms/writing-data) | `ContactSubmission` type, `app/actions/submitContact.ts`, `app/contact/page.tsx` | [`writing-data-completed`](https://github.com/webiny/learn-webiny-nextjs-app/tree/writing-data-completed) |
 
-- **📚 Full Tutorial:** [Lesson 8](https://webiny.com/learn/lessons/headless-cms/learn-webiny-nextjs-app)
-- **✅ Completed Example:** Check the [`completed` branch](https://github.com/webiny/learn-webiny-nextjs-app/tree/completed) to see the full solution
-- **📖 Webiny Docs:** [webiny.com/docs](https://www.webiny.com/docs)
-- **💬 Community:** [Webiny Community Slack](https://www.webiny.com/slack)
+Each `*-completed` branch contains the code from that lesson and every lesson before it. If you get stuck, compare your files with the branch, or check it out and add your own `.env.local`.
 
-## What's Next?
+## Project structure
 
-After completing Lesson 8, continue with:
-- **Lesson 9:** Writing Data (Create a contact form with mutations)
-- **Lesson 10:** Lifecycle Events (Email validation)
-- **Lesson 11:** Customize Data Lists
-- **Lesson 12:** Create Custom APIs
+```
+learn-webiny-nextjs-app/
+├── app/
+│   ├── layout.tsx       # Root layout
+│   ├── page.tsx         # Homepage, you replace it in the Reading Data lesson
+│   ├── globals.css      # Tailwind styles
+│   └── favicon.ico
+├── lib/                 # Empty, the lessons add files here
+├── .env.local.example   # Environment variable template
+├── next.config.ts
+├── package.json
+└── tsconfig.json
+```
 
-## Tech Stack
+## Environment variables
 
-- **Next.js** 16.1.6 (App Router)
-- **React** 19.2.3
-- **TypeScript** 5
-- **Tailwind CSS** 4
-- **Webiny** Headless CMS
+| Variable | Description |
+| --- | --- |
+| `WEBINY_API_ENDPOINT` | Base URL of your Webiny API, for example `https://d1ud9w3i9i7d77.cloudfront.net` |
+| `WEBINY_API_TOKEN` | Token of the API key you create in the lesson |
+| `WEBINY_API_TENANT` | Optional. Tenant ID, defaults to `root` |
+
+Never commit `.env.local`. It is already listed in `.gitignore`.
+
+## Tech stack
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript 5
+- Tailwind CSS 4
+- `@webiny/sdk` 6.5
+
+## Help
+
+- [Webiny docs](https://www.webiny.com/docs)
+- [Webiny community Slack](https://www.webiny.com/slack)
 
 ## License
 
 MIT
-
----
-
-**Built with ❤️ for the Webiny learning community**
