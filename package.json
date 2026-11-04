@@ -1,7 +1,7 @@
 {
   "name": "learn-webiny-nextjs-app",
   "version": "0.1.0",
-  "description": "A Next.js starter app for learning Webiny Headless CMS integration with Static Site Generation",
+  "description": "Companion Next.js app for the Learn Webiny Headless CMS course",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,7 +10,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@webiny/sdk": "6.0.0-rc.0",
+    "@webiny/sdk": "6.5.1",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"
